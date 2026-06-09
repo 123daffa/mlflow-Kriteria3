@@ -9,7 +9,7 @@ from joblib import dump
 data = pd.read_csv("wine.csv")
 
 # Set MLflow Tracking URI
-mlflow.set_tracking_uri("http://127.0.0.1:5000/")
+mlflow.set_tracking_uri("file:./mlruns")
 
 
 # Create a new MLflow Experiment
