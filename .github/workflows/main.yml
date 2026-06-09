@@ -20,18 +20,23 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: "3.13.3"
-
+          
+      - name: Check Env
+        run: |
+          echo $CSV_URL
+          
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
           pip install mlflow pandas scikit-learn joblib
 
-      - name: Check Files
+      - name: Set MLflow Tracking URI
         run: |
-          pwd
-          ls -la
+           echo "MLFLOW_TRACKING_URI=file:./mlruns" >> $GITHUB_EN
 
       - name: Run MLflow Project
+        env:
+          MLFLOW_ALLOW_FILE_STORE: "true"
         run: |
           mlflow run . --env-manager=local
 
